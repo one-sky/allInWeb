@@ -14,7 +14,7 @@
 ## 本地环境搭建
 ```bash
   # 拉取项目
-  git clone
+  git clone git@github.com:one-sky/allInWeb.git
   # 安装依赖puppeteer
   npm i puppeteer
   # 安装依赖mysql

@@ -1,4 +1,5 @@
 const conn = require("./conn");
+const Util = require("./util");
 const connection = conn();
 
 /**
@@ -20,15 +21,8 @@ const insert = async (table, dataList = [], callback, keyMatch = true) => {
   });
   // 将key为类似workType转化为work_type
   fields = fields.join(",");
-  if (!keyMatch) {
-    fields = fields.replace(/[A-Z]/, x => {
-      return `_${x.toLowerCase()}`;
-    });
-  }
-  fields = fields.join(",").replace(/[A-Z]/, x => {
-    return `_${x.toLowerCase()}`;
-  });
-  const sql = `INSERT INTO ${table}(${fields.join(",")}) VALUES(?)`;
+  fields = !keyMatch && Util.formatKey(fields);
+  const sql = `INSERT INTO ${table}(${fields}) VALUES(?)`;
   console.log(sql);
   await connection.query(sql, [valueList], (err, rows, fields) => {
     if (err) {

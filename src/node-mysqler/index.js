@@ -1,9 +1,6 @@
-const mysql = require("mysql");
 import INSERT from "./src/insert";
-
-const DELETE = () => {};
-
-const UPDATE = () => {};
+import DELETE from "./src/delete";
+import UPDATE from "./src/update";
 
 const SELECT = () => {};
 

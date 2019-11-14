@@ -5,7 +5,8 @@ async function main() {
     user: "root",
     password: "root",
     port: "3306",
-    database: "TestDB"
+    database: "TestDB",
+    keyMatch: false // dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
   });
   let dataList = [
     {
@@ -21,8 +22,9 @@ async function main() {
       price: 2222.0
     }
   ];
-  // await DB.insert("products", dataList, undefined, false);
+  await DB.insert("products", dataList, undefined, false);
 
+  // SELECT id,title,img_url FROM products WHERE img_url like '%22%' and title in ('333','ccc')
   const fields = ['id', 'title', 'imgUrl'];
   let condition = {imgUrl: {lowOption: 'like', low:'%22%'}, title: ['333', 'ccc'] };
   dataList = await DB.select("products", fields, condition,undefined, false);

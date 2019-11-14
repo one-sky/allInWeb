@@ -4,9 +4,8 @@ const Util = require("./util");
  * @param {*} table
  * @param {*} dataList
  * @param {*} callback
- * @param {*} keyMatch true：dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
  */
-const insert = (table, dataList = [], callback, keyMatch = true) => new Promise(( resolve, reject ) => {
+const insert = (table, dataList = [], callback) => new Promise(( resolve, reject ) => {
   const connection = global.connection;
   try {
     if (!connection) {
@@ -23,7 +22,7 @@ const insert = (table, dataList = [], callback, keyMatch = true) => new Promise(
     });
     // 将key为类似workType转化为work_type
     fields = fields.join(",");
-    fields = !keyMatch && Util.formatKey(fields);
+    fields = !global.keyMatch && Util.formatKey(fields);
     const sql = `INSERT INTO ${table}(${fields}) VALUES ?`;
     console.log(sql);
     console.log(valueList);

@@ -6,24 +6,22 @@ const Util = require("./util");
  * @param {*} attrs
  * @param {*} condition example: condition = {id: 1,year: {lowOption: '>=', low:12, highOption: '<', high: 14}}, workType: ['前端工程师', 'python工程师']}
  * @param {*} callback
- * @param {*} keyMatch true：dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
  */
 const update = (
   table,
   attrs = {},
   condition = {},
   callback,
-  keyMatch = true
 ) => new Promise(( resolve, reject ) => {
   try {
     const connection = global.connection;
     if (!connection) {
       return valueList;
     }
-    const _WHERE = Util.concatCondition(condition, keyMatch);
+    const _WHERE = Util.concatCondition(condition);
     console.log(attrs)
     const attrList = Object.entries(attrs).map(item => {
-      item[0] = !keyMatch && Util.formatKey(item[0]);
+      item[0] = !global.keyMatch && Util.formatKey(item[0]);
       return `${item[0]}=${Util.addQuotaByType(item[1])}`;
     });
     if (attrList.length === 0) {

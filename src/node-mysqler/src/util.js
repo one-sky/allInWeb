@@ -14,12 +14,12 @@ const formatKeyToObject = (fields = "") => {
   return fields;
 };
 
-const concatCondition = (condition = {}, keyMatch) => {
+const concatCondition = (condition = {}) => {
   let _WHERE = [];
   for (let key in condition) {
     const val = condition[key];
     //处理驼峰式key与数据库 ‘_’分隔 字段名匹配
-    key = !keyMatch && formatKey(key);
+    key = !global.keyMatch && formatKey(key);
     switch (
       Object.prototype.toString
         .call(val)

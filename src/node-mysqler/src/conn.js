@@ -1,5 +1,7 @@
 const mysql = require("mysql");
 const conn = config => new Promise(( resolve, reject ) => {
+  // dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
+  global.keyMatch = !!config.keyMatch;
   global.connection = mysql.createConnection({ ...config });
   global.connection.connect(err => {
     if (err) {

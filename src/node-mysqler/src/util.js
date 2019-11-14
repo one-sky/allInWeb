@@ -1,3 +1,5 @@
+const addQuotaByType = value => typeof value === 'number' ? value : `'${value}'`;
+
 const formatKey = (fields = "") => {
   fields = fields.replace(/[A-Z]/g, x => {
     return `_${x.toLowerCase()}`;
@@ -26,22 +28,23 @@ const concatCondition = (condition = {}, keyMatch) => {
         .toLowerCase()
     ) {
       case "array": // in enum[]
-        _WHERE.push(`${key} in [${val.join(",")}]`);
-        return;
+        _WHERE.push(`${key} in ('${val.join("','")}')`);
+        break;
       case "object": // 区间 或者 not in enum 或者 <>单值
-        let tmp = `${key} ${val.lowOption} ${val.low}`;
-        tmp += val.highOption ? `${val.highOption} ${high}` : "";
+        let tmp = `${key} ${val.lowOption} ${addQuotaByType(val.low)}`;
+        tmp += !!val.highOption ? `${val.highOption} ${addQuotaByType(val.high)}` : '';
         _WHERE.push(tmp);
-        return;
+        break;
       default:
         _WHERE.push(`${key} = ${val}`);
-        return;
     }
   }
   return _WHERE.join(" and ");
 };
 
 module.exports = {
+  addQuotaByType,
   formatKey,
+  formatKeyToObject,
   concatCondition
 };

@@ -8,28 +8,28 @@ const Util = require("./util");
  * @param {*} callback
  */
 
-const deleteData = async (table, condition = {}, callback, keyMatch = true) => {
+const deleteData = (table, condition = {}, callback, keyMatch = true) => new Promise(( resolve, reject ) => {
   try {
     const connection = global.connection;
     if (!connection) {
-      return;
+      reject();
     }
     let _WHERE = Util.concatCondition(condition, keyMatch);
     let sql = `DELETE FROM ${table}`;
     sql += condition ? ` WHERE ${_WHERE}` : "";
     console.log(sql);
-    await connection.query(sql, (err, rows, fields) => {
+    connection.query(sql, (err, rows, fields) => {
       if (err) {
         console.log("DELETE ERROR - ", err.message);
-        return err;
+        reject(err);
       }
       callback && callback();
+      resolve(rows.affectedRows);
     });
   } catch (error) {
     console.log(error);
-  } finally {
-    return;
+    reject(error);
   }
-};
+});
 
 module.exports = deleteData;

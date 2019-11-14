@@ -8,16 +8,16 @@ const Util = require("./util");
  * @param {*} callback
  * @param {*} keyMatch true：dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
  */
-const select = async (table, fields, condition, callback, keyMatch = true) => {
+const select = (table, fields, condition, callback, keyMatch = true) => new Promise(( resolve, reject ) => {
   let valueList = []; //存放select到的数组 [{},{}]
   try {
     const connection = global.connection;
     if (!connection) {
-      return valueList;
+      reject();
     }
     if (fields && fields instanceof Array) {
       fields = fields.join(",");
-      !keyMatch && Util.formatKey(fields);
+      fields = !keyMatch && Util.formatKey(fields);
     } else {
       fields = "*";
     }
@@ -25,10 +25,10 @@ const select = async (table, fields, condition, callback, keyMatch = true) => {
     let sql = `SELECT ${fields} FROM ${table}`;
     sql += condition ? ` WHERE ${_WHERE}` : "";
     console.log(sql);
-    await connection.query(sql, (err, results, fields) => {
+    connection.query(sql, (err, results, fields) => {
       if (err) {
         console.log("SELECT ERROR - ", err.message);
-        return;
+        reject(err);
       }
       valueList = JSON.stringify(results);
       valueList = JSON.parse(valueList);
@@ -38,12 +38,12 @@ const select = async (table, fields, condition, callback, keyMatch = true) => {
         )
       );
       callback && callback();
+      resolve(valueList);
     });
   } catch (error) {
     console.log(error);
-  } finally {
-    return valueList;
+    reject(error);
   }
-};
+});
 
 module.exports = select;

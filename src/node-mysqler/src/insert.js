@@ -6,11 +6,11 @@ const Util = require("./util");
  * @param {*} callback
  * @param {*} keyMatch true：dataList中的key与表中字段名一致 false为key为驼峰式，表中为下划线分割（example：work_type)
  */
-const insert = async (table, dataList = [], callback, keyMatch = true) => {
+const insert = (table, dataList = [], callback, keyMatch = true) => new Promise(( resolve, reject ) => {
   const connection = global.connection;
   try {
     if (!connection) {
-      return;
+      reject();
     }
     let fields = []; // 存放key的数组
     let valueList = []; //存放insert数据的数组 [[],[]]
@@ -24,22 +24,23 @@ const insert = async (table, dataList = [], callback, keyMatch = true) => {
     // 将key为类似workType转化为work_type
     fields = fields.join(",");
     fields = !keyMatch && Util.formatKey(fields);
-    const sql = `INSERT INTO ${table}(${fields}) VALUES(?)`;
+    const sql = `INSERT INTO ${table}(${fields}) VALUES ?`;
     console.log(sql);
     console.log(valueList);
-    await connection.query(sql, valueList, (err, rows, fields) => {
+    connection.query(sql, [valueList], (err, rows, fields) => {
       if (err) {
         console.log("INSERT ERROR - ", err.message);
-        return err;
+        reject(err);
       }
       callback && callback();
-      return rows;
+      resolve(rows);
     });
   } catch (error) {
     console.log(error);
+    reject(error);
   } finally {
-    return;
+    resolve();
   }
-};
+});
 
 module.exports = insert;

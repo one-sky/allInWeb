@@ -1,15 +1,16 @@
 const mysql = require("mysql");
-const conn = async config => {
-  global.connection = await mysql.createConnection({ ...config });
-  await connection.connect(err => {
+const conn = config => new Promise(( resolve, reject ) => {
+  global.connection = mysql.createConnection({ ...config });
+  global.connection.connect(err => {
     if (err) {
       console.log(`[query] - : ${err}`);
-      return 0;
+      reject(err);
     }
     console.log("[connection connect] succeed!");
+    resolve();
   });
-  return 1;
-};
+  return;
+});
 
 const close = () => {
   if (!global.connection) {
@@ -17,7 +18,7 @@ const close = () => {
   }
   global.connection.end(err => {
     if (err) {
-      return;
+      // process.exit(0);
     }
     console.log("[connection end] succeed!");
   });

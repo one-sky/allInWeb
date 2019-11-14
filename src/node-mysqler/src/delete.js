@@ -1,6 +1,4 @@
-const conn = require("./conn");
 const Util = require("./util");
-const connection = conn();
 
 /**
  *
@@ -10,19 +8,28 @@ const connection = conn();
  * @param {*} callback
  */
 
-const deleteData = (table, condition = {}, callback, keyMatch = true) => {
-  let _WHERE = Util.concatCondition(condition, keyMatch);
-  let sql = `DELETE FROM ${table}`;
-  sql +=  condition ? ` WHERE ${_WHERE}` : '';
-  console.log(sql);
-  await connection.query(sql, (err, rows, fields) => {
-    if (err) {
-      console.log("DELETE ERROR - ", err.message);
+const deleteData = async (table, condition = {}, callback, keyMatch = true) => {
+  try {
+    const connection = global.connection;
+    if (!connection) {
       return;
     }
-    callback && callback();
-  });
-  return;
+    let _WHERE = Util.concatCondition(condition, keyMatch);
+    let sql = `DELETE FROM ${table}`;
+    sql += condition ? ` WHERE ${_WHERE}` : "";
+    console.log(sql);
+    await connection.query(sql, (err, rows, fields) => {
+      if (err) {
+        console.log("DELETE ERROR - ", err.message);
+        return err;
+      }
+      callback && callback();
+    });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    return;
+  }
 };
 
 module.exports = deleteData;

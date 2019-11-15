@@ -1,0 +1,14 @@
+{
+  "name": "webpack-template",
+  "version": "1.0.0",
+  "description": "a template for react+webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "caoyw",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.12.0"
+  }
+}

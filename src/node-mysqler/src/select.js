@@ -15,7 +15,7 @@ const select = (table, fields, condition, callback) => new Promise(( resolve, re
       reject();
     }
     if (fields && fields instanceof Array) {
-      fields = fields.join(",");
+      fields = fields.toString();
       fields = !global.keyMatch && Util.formatKey(fields);
     } else {
       fields = "*";

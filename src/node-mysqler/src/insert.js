@@ -21,7 +21,7 @@ const insert = (table, dataList = [], callback) => new Promise(( resolve, reject
       valueList.push(fields.map(i => item[i]));
     });
     // 将key为类似workType转化为work_type
-    fields = fields.join(",");
+    fields = fields.toString();
     fields = !global.keyMatch && Util.formatKey(fields);
     const sql = `INSERT INTO ${table}(${fields}) VALUES ?`;
     console.log(sql);

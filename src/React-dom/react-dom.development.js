@@ -1,4 +1,7 @@
 /** @license React v16.11.0
+ * setState: enqueueSetState -> enqueueUpdate -> scheduleWork (scheduleUpdateOnFiber)->
+ * 同步   1. performSyncWorkOnRoot -> workLoopSync -> performUnitOfWork -> beginWork$$1 -> assignFiberPropertiesInDEV
+ * 异步   2. schedulePendingInteractions -> workLoopSync -> performUnitOfWork -> beginWork$$1 -> assignFiberPropertiesInDEV
  */
 "use strict";
 
@@ -26,6 +29,20 @@ if (process.env.NODE_ENV !== "production") {
 
     var enableSchedulerTracing = true; // Only used in www builds.
 
+    function requestCurrentTime() {
+      if ((executionContext & (RenderContext | CommitContext)) !== NoContext) {
+        // We're inside React, so it's fine to read the actual time.
+        return msToExpirationTime(now());
+      } // We're not inside React, so we may be in the middle of a browser event.
+
+      if (currentEventTime !== NoWork) {
+        // Use the same start time for all updates until we enter React again.
+        return currentEventTime;
+      } // This is the first update since React yielded. Compute a new start time.
+
+      currentEventTime = msToExpirationTime(now());
+      return currentEventTime;
+    }
     const warningWithoutStack = function(condition, format) {
       for (
         var _len = arguments.length,
@@ -232,6 +249,30 @@ if (process.env.NODE_ENV !== "production") {
 
     function createContainer(containerInfo, tag, hydrate, hydrationCallbacks) {
       return createFiberRoot(containerInfo, tag, hydrate, hydrationCallbacks);
+    }
+
+    function updateContainer(element, container, parentComponent, callback) {
+      var current$$1 = container.current;
+      var currentTime = requestCurrentTime();
+      // // $FlowExpectedError - jest isn't a global, and isn't recognized outside of tests
+      // if ("undefined" !== typeof jest) {
+      //   warnIfUnmockedScheduler(current$$1);
+      //   warnIfNotScopedWithMatchingAct(current$$1);
+      // }
+      var suspenseConfig = requestCurrentSuspenseConfig();
+      var expirationTime = computeExpirationForFiber(
+        currentTime,
+        current$$1,
+        suspenseConfig
+      );
+      return updateContainerAtExpirationTime(
+        element,
+        container,
+        parentComponent,
+        expirationTime,
+        suspenseConfig,
+        callback
+      );
     }
 
     function createRootImpl(container, tag, options) {
@@ -473,7 +514,7 @@ if (process.env.NODE_ENV !== "production") {
             )
           : void 0;
 
-        // 清除container的子元素
+        // 核心
         return legacyRenderSubtreeIntoContainer(
           null,
           element,

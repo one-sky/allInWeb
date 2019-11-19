@@ -1,3 +1,7 @@
+var UpdateState = 0;
+var ReplaceState = 1;
+var ForceUpdate = 2;
+var CaptureUpdate = 3;
 function get(key) {
   return key._reactInternalFiber;
 }
@@ -60,7 +64,7 @@ function appendUpdateToQueue(queue, update) {
     // Queue is empty
     queue.firstUpdate = queue.lastUpdate = update;
   } else {
-    // 放入队列尾部，lastUpdate指向update
+    // 放入队列尾部，queue的lastUpdate next指向update 队尾指针指向update
     queue.lastUpdate.next = update;
     queue.lastUpdate = update;
   }
@@ -155,8 +159,9 @@ const classComponentUpdater = {
       fiber,
       suspenseConfig
     );
-    // 将一次setState作为一个update
+    // 根据更新时间初始化一个标识对象
     var update = createUpdate(expirationTime, suspenseConfig);
+    // payload:partialState
     update.payload = payload;
 
     if (callback !== undefined && callback !== null) {

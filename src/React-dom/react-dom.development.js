@@ -251,6 +251,98 @@ if (process.env.NODE_ENV !== "production") {
       return createFiberRoot(containerInfo, tag, hydrate, hydrationCallbacks);
     }
 
+    // 更新Root
+    function scheduleRootUpdate(
+      current$$1,
+      element,
+      expirationTime,
+      suspenseConfig,
+      callback
+    ) {
+      // {
+      //   if (
+      //     phase === "render" &&
+      //     current !== null &&
+      //     !didWarnAboutNestedUpdates
+      //   ) {
+      //     didWarnAboutNestedUpdates = true;
+      //     warningWithoutStack$1(
+      //       false,
+      //       "Render methods should be a pure function of props and state; " +
+      //         "triggering nested component updates from render is not allowed. " +
+      //         "If necessary, trigger nested updates in componentDidUpdate.\n\n" +
+      //         "Check the render method of %s.",
+      //       getComponentName(current.type) || "Unknown"
+      //     );
+      //   }
+      // }
+
+      var update = createUpdate(expirationTime, suspenseConfig); // Caution: React DevTools currently depends on this property
+      // being called "element".
+
+      update.payload = {
+        element: element
+      };
+      callback = callback === undefined ? null : callback;
+
+      if (callback !== null) {
+        !(typeof callback === "function")
+          ? warningWithoutStack$1(
+              false,
+              "render(...): Expected the last optional `callback` argument to be a " +
+                "function. Instead received: %s.",
+              callback
+            )
+          : void 0;
+        update.callback = callback;
+      }
+
+      enqueueUpdate(current$$1, update);
+      scheduleWork(current$$1, expirationTime);
+      return expirationTime;
+    }
+
+    // 每到过期时间，就更新container，过期时间单位为 10ms
+    function updateContainerAtExpirationTime(
+      element,
+      container,
+      parentComponent,
+      expirationTime,
+      suspenseConfig,
+      callback
+    ) {
+      // TODO: If this is a nested container, this won't be the root.
+      var current$$1 = container.current;
+
+      {
+        if (ReactFiberInstrumentation_1.debugTool) {
+          if (current$$1.alternate === null) {
+            ReactFiberInstrumentation_1.debugTool.onMountContainer(container);
+          } else if (element === null) {
+            ReactFiberInstrumentation_1.debugTool.onUnmountContainer(container);
+          } else {
+            ReactFiberInstrumentation_1.debugTool.onUpdateContainer(container);
+          }
+        }
+      }
+
+      var context = getContextForSubtree(parentComponent);
+
+      if (container.context === null) {
+        container.context = context;
+      } else {
+        container.pendingContext = context;
+      }
+
+      return scheduleRootUpdate(
+        current$$1,
+        element,
+        expirationTime,
+        suspenseConfig,
+        callback
+      );
+    }
+
     function updateContainer(element, container, parentComponent, callback) {
       var current$$1 = container.current;
       var currentTime = requestCurrentTime();
@@ -315,6 +407,26 @@ if (process.env.NODE_ENV !== "production") {
       return work;
     };
 
+    function getPublicInstance(instance) {
+      return instance;
+    }
+
+    function getPublicRootInstance(container) {
+      var containerFiber = container.current;
+
+      if (!containerFiber.child) {
+        return null;
+      }
+
+      switch (containerFiber.child.tag) {
+        case HostComponent:
+          return getPublicInstance(containerFiber.child.stateNode);
+
+        default:
+          return containerFiber.child.stateNode;
+      }
+    }
+
     // 清除container的子元素
     // 创建ReactRoot对象
     function legacyCreateRootFromDOMContainer(container, forceHydrate) {
@@ -375,7 +487,7 @@ if (process.env.NODE_ENV !== "production") {
       parentComponent,
       children,
       container,
-      forceHydrate, // 渲染标记 render时false
+      forceHydrate, // 渲染标记 render时false 在浏览器端不会去复用节点，而是全部替换掉；hydrate()为true，表示在服务端尽可能复用节点，提高性能;
       callback
     ) {
       topLevelUpdateWarnings(container);
@@ -402,6 +514,7 @@ if (process.env.NODE_ENV !== "production") {
         } // Initial mount should not be batched.
 
         unbatchedUpdates(function() {
+          // 创建更新container
           updateContainer(children, fiberRoot, parentComponent, callback);
         });
       } else {

@@ -50,6 +50,13 @@ var LowPriority = 96;
 var IdlePriority = 95; // NoPriority is the absence of priority. Also React-only.
 var NoPriority = 90;
 
+var initialTimeMs = Scheduler_now();
+var now =
+  initialTimeMs < 10000
+    ? Scheduler_now
+    : function() {
+        return Scheduler_now() - initialTimeMs;
+      };
 // 获取当前的任务调度优先等级
 function getCurrentPriorityLevel() {
   switch (Scheduler_getCurrentPriorityLevel()) {
@@ -79,7 +86,7 @@ function getCurrentPriorityLevel() {
   }
 }
 
-// 1 expirationTime === 10ms   ms -> expirationTime
+// 1 expirationTime === 10ms   ms -> expirationTime | 0取整
 function msToExpirationTime(ms) {
   return MAGIC_NUMBER_OFFSET - ((ms / UNIT_SIZE) | 0);
 }
@@ -220,8 +227,7 @@ function computeExpirationForFiber(currentTime, fiber, suspenseConfig) {
 
       case NormalPriority:
       case LowPriority:
-        // TODO: Handle LowPriority
-        // TODO: Rename this to... something better.
+        // 计算异步更新的过期时间
         expirationTime = computeAsyncExpiration(currentTime);
         break;
 

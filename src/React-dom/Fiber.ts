@@ -25,17 +25,17 @@ export type Fiber = {
 
   // 当前处理过程中的组件props对象
   pendingProps: any;
-  // 上一次渲染完成后组件props对象, 便于恢复
+  // 上一次渲染完成后组件props对象, 便于有更高优先级的中断，恢复props
   memoizedProps: any;
 
   // A queue of state updates and callbacks.
   // 组件状态更新和对应回调函数的存储队列
   updateQueue: UpdateQueue<any> | null;
 
-  // 上一次渲染完成后组件state对象, 便于恢复
+  // 上一次渲染完成后组件state对象, 便于有更高优先级的中断，恢复state
   memoizedState: any;
 
-  // Singly linked list fast path to the next fiber with side-effects.
+  // 记录状态改变的Dom的next指针，类似list
   nextEffect: Fiber | null;
 
   // The first and last fiber with side-effect within this subtree. This allows

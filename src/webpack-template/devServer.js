@@ -26,13 +26,13 @@ app.use(instance);
 // 静态资源
 app.use(server(path.resolve(__dirname, '../')));
 
-app.get('/favicon.ico', (req, res) => {
-    res.json({});
-});
+// app.get('/favicon.ico', (req, res) => {
+//     res.json({});
+// });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, './index.html'));
+// });
 
 // http.createServer(app.callback()).listen(3000);
 app.listen(3000);

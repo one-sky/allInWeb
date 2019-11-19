@@ -1,0 +1,141 @@
+/**
+ * 整个规则基于Airbnb JavaScript Style Guide
+ * https://github.com/airbnb/javascript
+ * 自动修复(部分规则) ./node_modules/.bin/eslint --fix src/views/xxx
+ */
+
+ {
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "node": true,
+      "mocha": true
+    },
+    "globals": {
+      "YOOGA": true,
+      "$": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "plugins": ["react", "jsx-a11y", "import"],
+    "settings": {
+      "import/resolver": "webpack"
+    },
+    "rules": {
+      // 非严格相等(===, !==)仅报警告
+      "eqeqeq": 1,
+      // 取消import有始终需要扩展名
+      "import/extensions": 0,
+      "import/no-extraneous-dependencies": 0,
+      // 4空格缩进
+      "indent": [
+        "error",
+        4,
+        {
+          "SwitchCase": 1
+        }
+      ],
+      // 取消换行符限制, 允许(\n\r)
+      "linebreak-style": 0,
+      // 单行最大宽度140字符
+      "max-len": [2, { "code": 140, "ignoreTrailingComments": true }],
+      // 允许使用console
+      "no-console": [1, { "allow": ["warn", "error"] }],
+      // 仅允许数学运算, 逻辑运算可以混合
+      "no-mixed-operators": [
+        2,
+        {
+          "groups": [
+            // ["+", "-", "*", "/", "%", "**"],
+            ["&", "|", "^", "~", "<<", ">>", ">>>"],
+            ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+            // ["&&", "||"],
+            ["in", "instanceof"]
+          ],
+          "allowSamePrecedence": true
+        }
+      ],
+      // 三元运算符嵌套仅报警告
+      "no-nested-ternary": 1,
+      // 对参数重新赋值仅报警告
+      "no-param-reassign": 1,
+      // 禁止使用(++, --)，仅允许循环语句中使用
+      "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
+      // 允许空行的空格
+      "no-trailing-spaces": [2, { "skipBlankLines": true }],
+      // 允许三元运算，允许a && a()
+      "no-unused-expressions": [
+        2,
+        { "allowShortCircuit": true, "allowTernary": true }
+      ],
+      // 关闭class method必须使用this
+      "class-methods-use-this": 0,
+      "react/no-unused-state": 2,
+      // 允许使用.js作为jsx
+      "react/jsx-filename-extension": 0,
+      // jsx 4格缩进
+      "react/jsx-indent": [2, 4],
+      "react/jsx-indent-props": [2, 4],
+      "react/jsx-no-undef": 1,
+      // 用index做key仅报警告
+      "react/no-array-index-key": 1,
+      // 允许单个js声明多个component
+      "react/no-multi-comp": 0,
+      "react/prop-types": [2, { "skipUndeclared": true }],
+      "react/react-in-jsx-scope": 2,
+      "react/prefer-es6-class": 1,
+      "react/sort-comp": [
+        2,
+        {
+          "order": [
+            "type-annotations",
+            "static-methods",
+            "lifecycle",
+            "show", // 页面显示
+            "hide", // 页面隐藏
+            "everything-else",
+            "render"
+          ]
+        }
+      ],
+      // 不用 prefer 纯函数组件
+      "react/prefer-stateless-function": 0,
+      // 允许下环线变量、方法
+      "no-underscore-dangle": 0,
+      "jsx-a11y/click-events-have-key-events": 0,
+      "jsx-a11y/no-static-element-interactions": 0,
+      "jsx-a11y/no-noninteractive-element-interactions": 0,
+      "jsx-a11y/href-no-hash": 0,
+      "jsx-a11y/media-has-caption": 0,
+      "jsx-a11y/anchor-is-valid": 0,
+      "react/forbid-prop-types": 0,
+      "arrow-parens": 0,
+      "function-paren-newline": 0,
+      "comma-dangle": [
+        2,
+        "only-multiline"
+      ],
+      "prefer-destructuring": [
+        2,
+        {
+          "AssignmentExpression": {
+            "array": true,
+            "object": false
+          }
+        }
+      ],
+      "import/no-named-as-default": 0,
+      "import/prefer-default-export": 0,
+      "radix": [0, "as-needed"],
+      "global-require": 0,
+      "jsx-a11y/alt-text": 0,
+      "jsx-a11y/no-autofocus": 0
+    }
+  }
+  

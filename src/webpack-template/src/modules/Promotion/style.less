@@ -1,0 +1,54 @@
+.Page {
+    background-color: #fff;
+    .head {
+        padding: .4rem .2rem .2rem;
+        font-size: .3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        .time {
+            margin-left: .3rem;
+            font-size: .2rem;
+            .desc {
+                margin-right: .12rem;
+            }
+        }
+    }
+    .saleList {
+        display: flex;
+        justify-content: space-around;
+        padding-bottom: .1rem;
+        .saleItem {
+            display: block;
+            width: 1.5rem;
+            .product {
+                width: 1.5rem;
+                height: 1.5rem;
+                background-size: cover;
+                background-position: center;
+                border-radius: .1rem .1rem 0 0;
+                position: relative;
+                overflow: hidden;
+                background-repeat: no-repeat;
+            }
+            .new {
+                // transform: scale(0.8);
+                // -webkit-transform: scale(0.8);
+                // transform-origin: center;
+                // -webkit-transform-origin: center;
+                text-align: center;
+                margin-top: .15rem;
+                font-size: .28rem;
+            }
+            .old {
+                color: #999;
+                box-sizing: border-box;
+                text-decoration: line-through;
+                vertical-align: top;
+                font-size: .22rem;
+                text-align: center;
+            }
+        }
+    }
+}

@@ -4,11 +4,42 @@
   "description": "a template for react+webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "export SOURCE_MAP=sourceMap NODE_ENV=dev ; node ./devServer.js",
+    "start:window": "set SOURCE_MAP=sourceMap&& set NODE_ENV=dev&& node ./devServer.js",
+    "build": "set NODE_ENV=production&& node ./devServer.js"
   },
   "author": "caoyw",
   "license": "ISC",
   "dependencies": {
-    "react": "^16.12.0"
+    "less": "^3.10.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "webpack": "^4.41.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-proposal-decorators": "^7.7.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "@koa/cors": "^3.0.0",
+    "autoprefixer": "^9.7.2",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "case-sensitive-paths-webpack-plugin": "^2.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "colors": "^1.4.0",
+    "css-loader": "^3.2.0",
+    "darmody-webpack-pwa-manifest": "^3.6.3",
+    "eslint": "^6.6.0",
+    "koa": "^2.11.0",
+    "koa-static": "^5.0.0",
+    "koa-webpack-middleware": "^1.0.7",
+    "node-notifier": "^6.0.0",
+    "on-build-webpack": "^0.1.0",
+    "style-loader": "^1.0.0"
   }
 }

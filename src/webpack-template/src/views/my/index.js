@@ -3,10 +3,6 @@ import cx from "classnames";
 // import Recommend from "modules/Recommend"; // 推荐
 
 import S from "./css/index.less";
-
-// const API = YOOGA.Util.handleApi({
-//   find: "/v1.0/find/index"
-// });
 const getMaxLimit = (num, limit = 30, symbol = "+") =>
   num > limit ? `${limit}${symbol}` : num;
 
@@ -30,7 +26,7 @@ export default class Index extends Component {
         ref={c => {
           this.page = c;
         }}
-        styleName="Page"
+        className={S.Page}
       >
         <div className={`${S.head} fi-theme-bgColor`}>
           <i className={`yoogaFM icon-fm-setting ${S.setting}`} />
@@ -77,14 +73,13 @@ export default class Index extends Component {
           </a>
         </div>
         {/* <LazyImage styleName="banner" src={banner} /> */}
-
         <div className={S.menuMain}>
           <div className={S.title}>更多服务</div>
           {/* 菜单九宫格 */}
           <div className={S.menuItem}>
             <a href="/balance?r=buyer_balance">
               <div className={S.navItem}>
-                <div className={`fi-theme-color ${navIcon}`}>
+                <div className={`fi-theme-color ${S.navIcon}`}>
                   <i className="yoogaFM icon-fm-newuser" />
                 </div>
                 <div className={S.name}>新人有礼</div>
@@ -108,7 +103,7 @@ export default class Index extends Component {
             </a>
             <a href="/balance?r=buyer_balance">
               <div className={S.navItem}>
-                <div className={`fi-theme-color ${navIcon}`}>
+                <div className={`fi-theme-color ${S.navIcon}`}>
                   <i className="yoogaFM icon-fm-newuser" />
                 </div>
                 <div className={S.name}>我的钱包</div>
@@ -129,3 +124,5 @@ export default class Index extends Component {
     );
   }
 }
+
+ReactDOM.render(<Index/>, document.getElementById('Page'));

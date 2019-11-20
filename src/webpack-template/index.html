@@ -1,1 +1,103 @@
-<script src="/allInWeb/src/webpack-template/dist/vendor.b89f049cc.js" />
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="apple-mobile-web-app-title" content="优格">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <meta http-equiv="Expires" CONTENT="0">
+        <meta http-equiv="Cache-Control" CONTENT="no-cache">
+        <meta http-equiv="Pragma" CONTENT="no-cache">
+        <meta name="renderer" content="webkit">
+        <meta name="force-rendering" content="webkit">
+        <title>优格</title>
+        <style>
+            @font-face{
+                font-family: yoogaFontMain;
+                src:url('/webpack-template/app/font/yoogaFontMain.ttf?v=1.0') format('truetype')
+            }
+            html {
+                background-color: #eee;
+            }
+            body {
+                margin: 0 auto;
+            }
+            .page-placeholder {
+                min-height: 100vh;
+                margin: 0 auto;
+                background-position: center 40%;
+                background-repeat: no-repeat;
+                background-size: 33.33% auto;
+            }
+        </style>
+    </head>
+    <body>
+    <script>
+        !function() {
+            function a() {
+                var clientWidth = document.documentElement.clientWidth > 640 ? 640 : document.documentElement.clientWidth;
+                document.documentElement.style.fontSize = clientWidth / 7.5 + "px";
+                var div = document.createElement("div");
+                div.style.width = "7.5rem";
+                document.body.appendChild(div);
+                document.documentElement.style.fontSize = document.documentElement.style.fontSize.replace("px", "") * clientWidth / div.clientWidth + "px";
+                document.body.removeChild(div);
+            }
+            var b = null;
+            window.addEventListener("resize", function() {
+                clearTimeout(b), b = setTimeout(a, 300)
+            }, !1), a()
+        }(window);
+        ;(function () {
+            var UA = window.navigator.userAgent;
+            var os = {
+                ios: UA.match(/iphone|ipad|ipod/i),
+                ipad: UA.match(/ipad/i),
+                iphone: UA.match(/iphone/i),
+                android: UA.match(/android/i),
+                webkit: UA.match(/webkit/i),
+                ie: UA.match(/MSIE/i),
+                wechat: UA.match(/micromessenger/i),
+            };
+            os.phone = os.ios || os.android;
+            os.pc = !os.phone;
+
+            document.querySelector('html').className += ' ' + Object.keys(os).map(function (key) {
+                return os[key] && 'device-' + key;
+            }).filter(function (i) {
+                return i;
+            }).join(' ');
+        })();
+    </script>
+    <style>
+        .page-placeholder {
+            width: 7.5rem;
+        }
+    </style>
+
+    <div id="J_Page" class="page-placeholder">
+        <div id="Page" class='curPage' data-page="1"></div>
+        <div id="message-alert"></div>
+    </div>
+    <script src="/webpack-template/router.js.log"></script> -->
+
+    <script type="text/javascript">
+        window.YOOGA ={
+            allPage: []
+        };
+        (function(){
+            function loadScript(src) {
+                document.write('<script src="' + src + '" crossorigin="anonymous"><\/script>');
+            }
+    
+            // 加载 manifest
+            loadScript(router.manifest.path)
+            // 加载 vendor
+            loadScript(router.vendor.path)
+            // 加载main
+            loadScript(router.main.path)
+            loadScript(router['/my/index'].path);
+        }())
+    </script>
+    </body>
+</html>
+

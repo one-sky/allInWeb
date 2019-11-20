@@ -1,14 +1,13 @@
-// const http = require('http');
+const http = require('http');
 const path = require('path');
 const webpack = require('webpack');
-const Koa = require('koa');
-const cors = require('@koa/cors');
-const server = require('koa-static');
-const { devMiddleware } = require('koa-webpack-middleware');
+const express = require('express');
+const cors = require('cors');
+const middleware = require('webpack-dev-middleware');
 
 const CONFIG = require('./webpack.config');
 
-const app = new Koa();
+const app = new express();
 const compiler = webpack(CONFIG);
 // 显示编译进度
 compiler.apply(new webpack.ProgressPlugin());
@@ -17,22 +16,21 @@ compiler.apply(new webpack.ProgressPlugin());
 app.use(cors({credentials: true}));
 
 // 配置运行时打包
-const instance = devMiddleware(compiler, {
-    publicPath: CONFIG.output.path
+const instance = middleware(compiler, {
+    publicPath: '/webpack-template/dist/'
 });
 
 app.use(instance);
 
 // 静态资源
-app.use(server(path.resolve(__dirname, '../')));
+app.use(express.static(path.resolve(__dirname, '../')));
 
-// app.get('/favicon.ico', (req, res) => {
-//     res.json({});
-// });
+app.get('/favicon.ico', (req, res) => {
+    res.json({});
+});
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, './index.html'));
-// });
-
-// http.createServer(app.callback()).listen(3000);
-app.listen(3000);
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './index.html'));
+});
+http.createServer(app).listen(3000, '0.0.0.0');
+// app.listen(3000);

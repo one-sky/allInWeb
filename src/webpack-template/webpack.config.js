@@ -18,7 +18,7 @@ const CONFIG = (() => {
     env: process.env.NODE_ENV,
     sourceMap: process.env.SOURCE_MAP === "sourceMap", // 是否使用sourceMap
     isDev: process.env.NODE_ENV === "dev", // 开发环境
-    distPath: "./dist",
+    distPath: "/dist",
     baseUrl: __dirname
   };
 })();
@@ -35,11 +35,21 @@ const { entries } = getEntriesRouter(CONFIG);
 const filename = CONFIG.isDev
   ? "[name].[hash:6].js"
   : "[name].[chunkhash:6].js";
-console.log(entries);
+console.log(path.resolve(__dirname, `.${CONFIG.distPath}`))
 module.exports = {
   cache: true,
   watch: false,
   mode: CONFIG.isDev ? "development" : "production",
+  devServer: {
+    contentBase: path.resolve(__dirname, `.${CONFIG.distPath}`),
+    compress: !CONFIG.isDev,
+    host: '0.0.0.0',
+    port: '3000',
+    hot: true,
+    inline: true,
+    open:true,
+    color: true
+  },
   entry: {
     ...entries,
     vendor: ["react", "react-dom", "prop-types", "classnames"]
@@ -76,8 +86,13 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
-              modules: true
-            }
+              modules: {
+                mode: 'local',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                context: path.resolve(__dirname, 'src'),
+                hashPrefix: 'my-custom-hash',
+              },
+            },
           },
           {
             loader: "postcss-loader"
@@ -123,14 +138,14 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          chunks: "all",
+          chunks: "initial",
           name: "vendor",
           test: "vendor"
         }
       }
     },
     runtimeChunk: {
-      name: "manifest"
+      name: 'manifest' // 会对entry配置runtimeChunk
     }
   },
   plugins: [

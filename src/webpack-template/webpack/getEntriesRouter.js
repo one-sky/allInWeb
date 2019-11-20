@@ -33,12 +33,12 @@ module.exports = function getEntriesRouter(
             .split("/")
             .slice(0, -1)
             .join("/");
-
+          entries[entryKey] = item;
           const FILE_CONTENT = fs.readFileSync(item, "utf8");
           FILE_CONTENT.replace(
             /YOOGA.allPage\[['"](.+)['"]\]/g,
             (matchStr, $0) => {
-              routers[$0] = `/yooga/${distPath}/${entryKey}.js`.replace(
+              routers[$0] = `${path.resolve(baseUrl,distPath)}/${entryKey}.js`.replace(
                 /\/+/g,
                 "/"
               );
@@ -55,7 +55,7 @@ module.exports = function getEntriesRouter(
 
   // 手动添加对main的支持
   routers = {
-    main: `/yooga/${distPath}/main.js`.replace(/\/+/g, "/"),
+    main: `/${distPath}/main.js`.replace(/\/+/g, "/"),
     ...routers
   };
   return {

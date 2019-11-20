@@ -1,22 +1,21 @@
 {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false,
-          "targets": {
-            "browsers": ["safari >= 7", "ie >= 9"]
-          }
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["safari >= 7", "ie >= 9"]
         }
-      ],
-      "@babel/preset-react"
+      }
     ],
-    "plugins": [
-      "@babel/plugin-syntax-dynamic-import",
-      ["@babel/plugin-transform-runtime", { "libraryName": "antd-mobile", "style": true }],
-      "@babel/plugin-proposal-object-rest-spread",
-      ["@babel/plugin-proposal-decorators",{"legacy": true}],
-      "@babel/plugin-proposal-class-properties"
-    ]
-  }
-  
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import", // 异步加载语法编译插件
+    ["@babel/plugin-transform-runtime"],
+    "@babel/plugin-proposal-object-rest-spread",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "@babel/plugin-proposal-class-properties" // 识别class组件
+  ]
+}

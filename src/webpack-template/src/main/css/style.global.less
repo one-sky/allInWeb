@@ -1,0 +1,520 @@
+@charset "utf-8";
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+form,
+button,
+input,
+textarea,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Microsoft Yahei, Arial, Simsun, Helvetica, Segoe UI, sans-serif;
+}
+ul,
+ol {
+  list-style: none;
+}
+div,
+img,
+a {
+  border: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  outline: none;
+  font-style: normal;
+  font-family: inherit;
+  vertical-align: baseline;
+  -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+// @import "./anima.less";
+
+img {
+  border: 0;
+  display: block;
+}
+
+ul,
+ol,
+li,
+dt,
+dl,
+dd,
+em,
+p {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+html {
+  background-color: #eee;
+  line-height: inherit !important;
+}
+body {
+  font-size: 12px !important;
+  margin: auto !important;
+  max-width: 7.5rem;
+  //margin: 0;
+  //padding: 0;
+  //color: #404040;
+  //font-size: 1rem;
+  //font-family: Microsoft Yahei, Arial, Simsun, Helvetica, Segoe UI, sans-serif;
+  //background-color: #FFF;
+  background-color: transparent !important;
+}
+#J_Page {
+  margin: auto;
+  width: 7.5rem;
+  background: none;
+}
+//#Page1{
+//    background: white;
+//    width:7.5rem;
+//    position: absolute;
+//    min-height: 100%;
+//}
+#Page {
+  background: #eee;
+  width: 7.5rem;
+  position: relative;
+  min-height: 100vh;
+}
+//#Page2{
+//    background: white;
+//    width:7.5rem;
+//    position: absolute;
+//    min-height: 100%;
+//}
+
+.promptTip {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 7.5rem;
+  z-index: 1999;
+  display: none;
+  .loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 3.6rem;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+    font-size: 14px;
+    color: #fff;
+    padding: 0.3rem 0.2rem;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: normal;
+    z-index: 9999;
+    text-align: center;
+  }
+}
+
+.yoogaMask {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+  z-index: 1999;
+  opacity: 0.1;
+}
+
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+.hide {
+  display: none;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.backgroundImg {
+  //display: flex;
+  //align-items: center;
+  //justify-content: center;
+  background-color: white;
+}
+
+.font-img {
+  position: relative;
+  background-color: white;
+  color: #bcbcbc;
+}
+.font-img i {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  left: 50%;
+  //background: white;
+  //color: #bcbcbc;
+  //font-size: 2rem;
+}
+.flexTop {
+  position: fixed;
+  top: 0;
+}
+.touchEffect {
+  background: rgba(0, 0, 0, 0.3) !important;
+  //opacity: 0.5;
+}
+.ui-tips {
+  position: fixed;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 3rem;
+  width: 2.5rem;
+  text-align: center;
+  color: red;
+}
+
+.yooga-leave {
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+}
+.yooga-leave.yooga-leave-active {
+  opacity: 0.01;
+}
+.yooga-enter {
+  opacity: 0.01;
+  transition: opacity 0.5s ease-in;
+}
+.yooga-enter.yooga-enter-active {
+  opacity: 1;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; /*初始状态 透明度为0*/
+  }
+  40% {
+    opacity: 0; /*中间状态 透明度为0*/
+  }
+  100% {
+    opacity: 1; /*结尾状态 透明度为1*/
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0; /*初始状态 透明度为0*/
+  }
+  40% {
+    opacity: 0; /*中间状态 透明度为0*/
+  }
+  100% {
+    opacity: 1; /*结尾状态 透明度为1*/
+  }
+}
+.fadeIn {
+  -webkit-animation-name: fadeIn; /*动画名称*/
+  -webkit-animation-duration: 1s; /*动画持续时间*/
+  -webkit-animation-iteration-count: 1; /*动画次数*/
+  -webkit-animation-delay: 0s; /*延迟时间*/
+
+  animation-name: fadeIn; /*动画名称*/
+  animation-duration: 1s; /*动画持续时间*/
+  animation-iteration-count: 1; /*动画次数*/
+  animation-delay: 0s; /*延迟时间*/
+}
+
+.imgFadeIn {
+  -webkit-animation-name: imgFadeIn; /*动画名称*/
+  -webkit-animation-duration: 1s; /*动画持续时间*/
+  -webkit-animation-iteration-count: 1; /*动画次数*/
+  -webkit-animation-delay: 0s; /*延迟时间*/
+  -webkit-animation-timing-function: ease-out;
+
+  animation-name: imgFadeIn; /*动画名称*/
+  animation-duration: 1s; /*动画持续时间*/
+  animation-iteration-count: 1; /*动画次数*/
+  animation-delay: 0s; /*延迟时间*/
+  animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes imgFadeIn {
+  0% {
+    opacity: 0; /*初始状态 透明度为0*/
+  }
+  100% {
+    opacity: 1; /*结尾状态 透明度为1*/
+  }
+}
+@keyframes imgFadeIn {
+  0% {
+    opacity: 0; /*初始状态 透明度为0*/
+  }
+  100% {
+    opacity: 1; /*结尾状态 透明度为1*/
+  }
+}
+
+.fadeInShort {
+  -webkit-animation-name: fadeIn; /*动画名称*/
+  -webkit-animation-duration: 0.6s; /*动画持续时间*/
+  -webkit-animation-iteration-count: 1; /*动画次数*/
+  -webkit-animation-delay: 0s; /*延迟时间*/
+
+  animation-name: fadeIn; /*动画名称*/
+  animation-duration: 0.6s; /*动画持续时间*/
+  animation-iteration-count: 1; /*动画次数*/
+  animation-delay: 0s; /*延迟时间*/
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1; /*初始状态 透明度为0*/
+  }
+  50% {
+    opacity: 0.5; /*中间状态 透明度为0*/
+  }
+  100% {
+    opacity: 0; /*结尾状态 透明度为1*/
+  }
+}
+.fadeOut {
+  -webkit-animation-name: fadeOut; /*动画名称*/
+  -webkit-animation-duration: 0.5s; /*动画持续时间*/
+  -webkit-animation-iteration-count: 1; /*动画次数*/
+  -webkit-animation-delay: 0s; /*延迟时间*/
+}
+
+.supportBanner {
+  width: 100%;
+  color: #888;
+  height: 49px;
+  font-size: 12px;
+  line-height: 49px;
+  text-align: center;
+
+  &.iphoneX {
+    @media only screen and (-webkit-device-pixel-ratio: 3) and (device-height: 812px) and (device-width: 375px) {
+      padding-bottom: 34px;
+      background-color: rgb(248, 248, 248);
+    }
+  }
+}
+
+.supportBanner .company {
+  color: #f2b896;
+}
+
+/*0.5像素边框*/
+.yooga-border {
+  position: relative;
+}
+
+.yooga-border:after {
+  position: absolute;
+  content: "";
+  background-color: #d9d9d9;
+}
+
+.yooga-border.horizonTop:after,
+.yooga-border.horizonBottom:after {
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.5);
+  -webkit-transform: scaleY(0.5);
+}
+
+.yooga-border.horizonTop:after {
+  left: 0;
+  top: 0;
+}
+
+.yooga-border.horizonBottom:after {
+  left: 0;
+  bottom: 0;
+}
+
+.yooga-border.verticalLeft:after,
+.yooga-border.verticalRight:after {
+  width: 1px;
+  height: 100%;
+  transform: scaleX(0.5);
+  -webkit-transform: scaleX(0.5);
+}
+
+.yooga-border.verticalLeft:after {
+  top: 0;
+  left: 0;
+}
+
+.yooga-border.verticalRight:after {
+  top: 0;
+  right: 0;
+}
+
+/*0.5像素边框*/
+.border {
+  position: relative;
+}
+.border:after {
+  position: absolute;
+  content: "";
+  background-color: #eee;
+}
+.border.horizonTop:after,
+.border.horizonBottom:after {
+  width: 100%;
+  height: 1px;
+  transform: scaleY(0.5);
+  -webkit-transform: scaleY(0.5);
+}
+.border.horizonTop:after {
+  left: 0;
+  top: 0;
+}
+.border.horizonBottom:after {
+  left: 0;
+  bottom: 0;
+}
+.border.verticalLeft:after,
+.border.verticalRight:after {
+  width: 1px;
+  height: 100%;
+  transform: scaleX(0.5);
+  -webkit-transform: scaleX(0.5);
+}
+.border.verticalLeft:after {
+  top: 0;
+  left: 0;
+}
+.border.verticalRight:after {
+  top: 0;
+  right: 0;
+}
+
+input.switch {
+  position: relative;
+  width: 52px;
+  height: 32px;
+  outline: none;
+  display: block;
+  margin: 0;
+  border-radius: 16px;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  border: solid 1px #dfdfdf;
+  background-color: #dfdfdf;
+  cursor: pointer;
+}
+
+input.switch:checked {
+  background-color: #53d769;
+  border: solid 1px #53d769;
+}
+
+input.switch:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+input.switch:checked:before {
+  transform: scale(0);
+}
+
+input.switch:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #fff;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+input.switch:checked:after {
+  transform: translateX(20px);
+}
+
+//层级
+.z-nav {
+  z-index: 10;
+}
+
+.z-mask {
+  z-index: 20;
+}
+
+.z-pop {
+  z-index: 30;
+}
+
+.priceSymbol {
+  font-size: 0.75em;
+}
+
+.baselineDown {
+  vertical-align: -1px;
+}
+
+.baselineUp {
+  vertical-align: 1px;
+}
+
+&.iphone {
+  /*iphoneX、iphoneXs*/
+  @media only screen and (-webkit-device-pixel-ratio: 3) and (device-height: 812px) and (device-width: 375px) {
+    padding-bottom: 34px;
+  }
+
+  /*iphone Xs Max*/
+  @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) {
+    padding-bottom: 34px;
+  }
+
+  /*iphone XR*/
+  @media only screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) {
+    padding-bottom: 34px;
+  }
+}

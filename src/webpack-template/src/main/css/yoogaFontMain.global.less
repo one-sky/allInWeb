@@ -1,0 +1,412 @@
+// @import "./common.less";
+
+@font-face {
+    font-family: yoogaFontMain;
+    src:url('/yooga/app/font/wptFontMain.ttf') format('truetype')
+  }
+.yoogaFM {
+    font-family: "yoogaFontMain" !important;
+    min-width: 1em;
+    color: inherit;
+    font-size: inherit;
+    font-style: normal;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/*图标大小比例*/
+.fi-stack {
+    position: relative;
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    vertical-align: middle;
+}
+
+.fi-stack-0x6,
+.fi-stack-0x8,
+.fi-stack-1x,
+.fi-stack-1x2,
+.fi-stack-1x5,
+.fi-stack-2x {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    font-size: 2em;
+    text-align: center;
+    line-height: inherit;
+}
+
+.fi-stack-0x6 {
+    transform: scale(0.3);
+    -webkit-transform: scale(0.3);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.fi-stack-0x8 {
+    transform: scale(0.4);
+    -webkit-transform: scale(0.4);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.fi-stack-1x2 {
+    transform: scale(0.6);
+    -webkit-transform: scale(0.6);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.fi-stack-1x5 {
+    transform: scale(0.75);
+    -webkit-transform: scale(0.75);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.fi-stack-1x {
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    transform-origin: center;
+    -webkit-transform-origin: center;
+}
+
+.fi-money-small {
+    font-size: .4em;
+}
+
+.fi-money-normal {
+    font-size: .8em;
+}
+
+.fi-money-big {
+    font-size: 1em;
+}
+
+.fi-size-140 {
+    font-size: 1.4em;
+}
+
+.fi-size-160 {
+    font-size: 1.6em;
+}
+
+.fi-size-200 {
+    font-size: 2em;
+}
+
+/*颜色*/
+.fi-theme-color {
+    color: #FFDB15;
+}
+
+.fi-theme-bgColor {
+    background-color: #FFDB15;
+}
+
+.fi-theme-boderColor {
+    border-color: #FFDB15;
+}
+
+.fi-theme-black {
+    color: #111;
+}
+.fi-theme-orange {
+    color: #ff9d00;
+}
+
+/*旋转*/
+.rotate45 {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.rotate90 {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+}
+
+.rotate180 {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+}
+
+.rotate270 {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+}
+
+/******MENU*****/
+// 首页
+.icon-fm-index:before {
+    content: "\e60f";
+}
+// 首页--选中
+.icon-fm-indexed:before {
+    content: "\e601";
+}
+
+// 分类
+.icon-fm-category:before {
+    content: "\e606";
+}
+
+.icon-fm-categoryed:before {
+    content: "\e604";
+}
+
+// 购物车
+.icon-fm-cart:before {
+    content: "\e611";
+}
+
+.icon-fm-carted:before {
+    content: "\e610";
+}
+
+// 我的
+.icon-fm-my:before {
+    content: "\e60e";
+}
+
+.icon-fm-myed:before {
+    content: "\e603";
+}
+
+
+/******首页******/
+// 搜索框搜索
+.icon-fm-search:before {
+    content: "\e60b";
+}
+
+// 留言
+.icon-fm-kefu:before {
+    content: "\e613";
+}
+
+/******商品******/
+// 包邮
+.icon-fm-baoyou:before {
+    content: "\e612";
+}
+
+// 包退
+.icon-fm-baotui:before {
+    content: "\e60c";
+}
+
+// 加号
+.icon-fm-jiahao:before {
+    content: "\e626";
+}
+
+// 减号
+.icon-fm-jianhao:before {
+    content: "\e625";
+}
+
+
+// 待关注
+.icon-fm-attention:before {
+    content: "\e616";
+}
+
+// 已关注
+.icon-fm-attentioned:before {
+    content: "\e617";
+}
+
+// 收藏
+.icon-fm-shoucang:before {
+    content: "\e614";
+}
+
+// 收藏
+.icon-fm-shoucanged:before {
+    content: "\e615";
+}
+
+// 推荐的爱心
+.icon-fm-aixin:before {
+    content: "\e629";
+}
+
+// 热卖
+.icon-fm-hot:before {
+    content: "\e62c";
+}
+
+// 无商品
+.icon-fm-noGood:before {
+    content: "\e62d";
+}
+
+// address
+.icon-fm-address:before{
+    content: "\e609"
+}  
+
+/******购物车******/
+// 无数据
+.icon-fm-noCart:before {
+    content: "\e628";
+}
+
+
+/******个人中心******/
+// 设置
+.icon-fm-setting:before {
+    content: "\e619";
+}
+
+// 我的历史
+.icon-fm-lishi:before {
+    content: "\e618";
+}
+
+// 我的订单
+.icon-fm-dingdan:before {
+    content: "\e61c";
+}
+
+// 全部
+.icon-fm-alldingdan:before {
+    content: "\e61f";
+}
+
+// 待付款
+.icon-fm-zhifu:before {
+    content: "\e61a";
+}
+
+// 待发货
+.icon-fm-fahuo:before {
+    content: "\e61e";
+}
+
+// 待评价
+.icon-fm-pingjia:before {
+    content: "\e61d";
+}
+
+// 取消／退款
+.icon-fm-refund:before {
+    content: "\e61b";
+}
+
+// 优惠券
+.icon-fm-coupon:before {
+    content: "\e621";
+}
+
+// 邀请有礼
+.icon-fm-invite:before {
+    content: "\e620";
+}
+
+// 新人有礼
+.icon-fm-newuser:before {
+    content: "\e622";
+}
+
+/******common******/
+// 圆圈
+.icon-fm-circle:before {
+    content: "\e623";
+}
+
+// 圆圈选中
+.icon-fm-selected:before {
+    content: "\e624";
+}
+
+// 删除
+.icon-fm-backspace:before {
+    content: "\e627";
+}
+
+// 回退 不带圈左箭头
+.icon-fm-back:before {
+    content: "\e62a";
+}
+
+// 带圈右箭头
+.icon-fm-wptFontMain:before {
+    content: "\e62b";
+}
+
+/*右箭头  > */
+.icon-fm-arrowright:before{
+    content: "\e62e"
+} 
+
+/*带圈分享  */
+.icon-fm-share:before{
+    content: "\e62f"
+}
+
+
+/*回收站的删除  */
+.icon-fm-delete:before{
+    content: "\e630"
+}
+
+
+
+/******买家中心******/
+.icon-fm-notrate:before {
+    content: "\e655";
+}
+
+.icon-fm-notreceipt:before {
+    content: "\e654";
+}
+
+.icon-fm-notpaid:before {
+    content: "\e652";
+}
+
+.icon-fm-trace:before {
+    content: "\e651";
+}
+
+.icon-fm-ident:before {
+    content: "\e64f";
+}
+
+.icon-fm-newsale:before {
+    content: "\e64e";
+}
+
+.icon-fm-exhibits:before {
+    content: "\e64d";
+}
+
+.icon-fm-represent:before {
+    content: "\e64c";
+}
+
+.icon-fm-message:before {
+    content: "\e65c";
+}
+
+.icon-fm-im:before {
+    content: "\e70c";
+}
+
+.icon-fm-coupon-menu:before {
+    content: "\e6c5";
+}
+
+.icon-fm-buyer-help:before {
+    content: "\e74b";
+}
+
+// 粗箭头
+.icon-fm-arrowright-bolder:before { 
+    content: "\e73c"; 
+}

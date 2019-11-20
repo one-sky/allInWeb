@@ -22,19 +22,19 @@ async function main() {
       price: 2222.0
     }
   ];
-  await DB.insert("products", dataList, undefined, false);
+  await DB.insert("products", dataList, undefined);
 
   // SELECT id,title,img_url FROM products WHERE img_url like '%22%' and title in ('333','ccc')
   const fields = ['id', 'title', 'imgUrl'];
   let condition = {imgUrl: {lowOption: 'like', low:'%22%'}, title: ['333', 'ccc'] };
-  dataList = await DB.select("products", fields, condition,undefined, false);
+  dataList = await DB.select("products", fields, condition,undefined);
   console.log(dataList);
 
   condition = {id: dataList.length > 0 ? dataList[0].id : 1};
-  let result = await DB.update("products", {imgUrl: 'http://bb1.com'}, condition,undefined, false);
+  let result = await DB.update("products", {imgUrl: 'http://bb1.com'}, condition,undefined);
   console.log(`affect rows ${result}`);
 
-  result = await DB.delete("products", condition,undefined, false);
+  result = await DB.delete("products", condition,undefined);
   console.log(`delete rows ${result}`);
 
   process.exit(0);

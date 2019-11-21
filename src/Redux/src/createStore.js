@@ -3,6 +3,7 @@ import $$observable from "symbol-observable";
 import ActionTypes from "./utils/actionTypes";
 import isPlainObject from "./utils/isPlainObject";
 
+// action ?????  reducer????????? ????state ? action
 /**
  * Creates a Redux store that holds the state tree.
  * The only way to change the data in the store is to call `dispatch()` on it.
@@ -28,6 +29,8 @@ import isPlainObject from "./utils/isPlainObject";
  * @returns {Store} A Redux store that lets you read the state, dispatch actions
  * and subscribe to changes.
  */
+// ??????function????enhancer
+// ??????preloadedState?function????????enhancer????
 export default function createStore(reducer, preloadedState, enhancer) {
   if (
     (typeof preloadedState === "function" && typeof enhancer === "function") ||
@@ -140,7 +143,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
     };
   }
 
-  // action ?????? && action.type ?? && ??????dispatch????dispatch
+  // action ????? && action.type ?? && ??????dispatch????dispatch
   function dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error(
@@ -243,6 +246,7 @@ export default function createStore(reducer, preloadedState, enhancer) {
   // When a store is created, an "INIT" action is dispatched so that every
   // reducer returns their initial state. This effectively populates
   // the initial state tree.
+  // ???currentState ??undefined??reducer??state???currentState
   dispatch({ type: ActionTypes.INIT });
 
   return {

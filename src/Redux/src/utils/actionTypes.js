@@ -1,5 +1,6 @@
 // 获取类似这样的y.b.p.8.p.h随机数
 // Number.prototype.toString(radix),radix基数，2进制、10进制、16进制等 2<=redix<=36
+// INIT 用于获取传入reducer的默认返回值
 const randomString = () =>
   Math.random()
     .toString(36)

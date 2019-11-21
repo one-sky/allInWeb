@@ -10,6 +10,7 @@ import __DO_NOT_USE__ActionTypes from "./utils/actionTypes";
  * This is a dummy function to check if the function name has been altered by minification.
  * If the function has been minified and NODE_ENV !== 'production', warn the user.
  */
+// 防止开发者在开发环境下对代码进行压缩 压缩后isCrushed会被替换成d
 function isCrushed() {}
 
 if (
@@ -32,5 +33,5 @@ export {
   bindActionCreators,
   applyMiddleware,
   compose,
-  __DO_NOT_USE__ActionTypes // 不允许使用redux自带的action的类型，以防出现错误
+  __DO_NOT_USE__ActionTypes // 帮助开发者检查不允许使用redux自带的action的类型，以防出现错误
 };

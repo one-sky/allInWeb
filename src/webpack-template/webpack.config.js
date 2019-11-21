@@ -35,7 +35,6 @@ const { entries } = getEntriesRouter(CONFIG);
 const filename = CONFIG.isDev
   ? "[name].[hash:6].js"
   : "[name].[chunkhash:6].js";
-console.log(path.resolve(__dirname, `.${CONFIG.distPath}`))
 module.exports = {
   cache: true,
   watch: false,
@@ -43,11 +42,11 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, `.${CONFIG.distPath}`),
     compress: !CONFIG.isDev,
-    host: '0.0.0.0',
-    port: '3000',
+    host: "0.0.0.0",
+    port: "3000",
     hot: true,
     inline: true,
-    open:true,
+    open: true,
     color: true
   },
   entry: {
@@ -87,12 +86,12 @@ module.exports = {
             loader: "css-loader",
             options: {
               modules: {
-                mode: 'local',
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                context: path.resolve(__dirname, 'src'),
-                hashPrefix: 'my-custom-hash',
-              },
-            },
+                mode: "local",
+                localIdentName: "[path][name]__[local]--[hash:base64:5]",
+                context: path.resolve(__dirname, "src"),
+                hashPrefix: "my-custom-hash"
+              }
+            }
           },
           {
             loader: "postcss-loader"
@@ -145,7 +144,7 @@ module.exports = {
       }
     },
     runtimeChunk: {
-      name: 'manifest' // 会对entry配置runtimeChunk
+      name: "manifest" // 会对entry配置runtimeChunk
     }
   },
   plugins: [

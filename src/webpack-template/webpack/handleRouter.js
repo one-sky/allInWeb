@@ -10,10 +10,7 @@ function handleRouter(compilation, config, extraChunks = {}) {
   Object.keys(routers).forEach(key => {
     const itemPath = routers[key];
     assets.forEach(item => {
-      const newPath = `/${config.distPath}/${item}`.replace(
-        /\/+/g,
-        "/"
-      );
+      const newPath = `/${config.distPath}/${item}`.replace(/\/+/g, "/");
       const itemKey = item.replace(/\.[^.]+\.js$/, "");
       // 无用的 icon chunk
       if (itemKey.startsWith("icon")) {

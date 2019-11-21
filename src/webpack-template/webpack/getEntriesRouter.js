@@ -23,11 +23,11 @@ module.exports = function getEntriesRouter(
         const STAT = fs.statSync(item);
         // windows 路径\  linux /
         // 定位到View.js 作为每个chunk的入口文件
-        if (STAT.isFile() && /\/View.js$/.test(item)) {
+        if (STAT.isFile() && /[\/\\]View.js$/.test(item)) {
           //   if (!ignoreNeedPack && !isNeedPack(item)) {
           //     return;
           //   }
-          // windows 路径\  linux /
+          // TODO windows 路径\  linux /
           const entryKey = item
             .slice(ROOT_PATH_LEN)
             .split("/")
@@ -38,10 +38,8 @@ module.exports = function getEntriesRouter(
           FILE_CONTENT.replace(
             /YOOGA.allPage\[['"](.+)['"]\]/g,
             (matchStr, $0) => {
-              routers[$0] = `${path.resolve(baseUrl,distPath)}/${entryKey}.js`.replace(
-                /\/+/g,
-                "/"
-              );
+              console.log($0);
+              routers[$0] = `${distPath}/${entryKey}.js`.replace(/\/+/g, "/");
             }
           );
         } else if (STAT.isDirectory()) {
